@@ -1,6 +1,6 @@
 import { FlatList, Text, View } from 'react-native'
 import React, { Component } from 'react'
-import { MEALS } from '../data/data'
+import { CATEGORIES, MEALS } from '../data/data'
 import MealItem from '../components/MealItem'
 
 interface MyProps {
@@ -17,6 +17,13 @@ export class MealsOverviewScreen extends Component<MyProps , MyState> {
         this.state = {
             catId : this.props.route.params.categoryId
         }
+    }
+
+    componentDidMount(): void {
+      const categoryTitle = CATEGORIES.find((category)=> category.id === this.state.catId).title
+      this.props.navigation.setOptions({
+        title : categoryTitle
+      })
     }
 
     renderMealItem = (itemData) => {
